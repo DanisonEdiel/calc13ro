@@ -23,7 +23,7 @@ export interface client {
 
 const { downloadCsv } = useCsvExported();
 const { clientRules } = useClientRules();
-const mockData = ref<client[]>([]);
+const clients = ref<client[]>([]);
 const newRecord = ref<client>({} as client);
 const showClients = ref(false);
 const snackbar = ref(false);
@@ -36,25 +36,25 @@ const payTypeDropDown = ref([
 ]);
 
 const onDownload = () => {
-  downloadCsv(mockData.value);
+  downloadCsv(clients.value);
 };
 
 const onRecordAdd = () => {
   validator.value.$validate();
   if (!validator.value.$error) {
-    if (mockData.value.find((x) => x.identity == newRecord.value.identity)) {
+    if (clients.value.find((x) => x.identity == newRecord.value.identity)) {
       snackbar.value = true;
       return;
     }
-    mockData.value.push(newRecord.value);
+    clients.value.push(newRecord.value);
     newRecord.value = {} as client;
     validator.value.$reset();
   }
 };
 
 const onDelete = (index: client) => {
-  mockData.value = mockData.value.filter((x) => x.identity != index.identity);
-  if (mockData.value.length <= 0) {
+  clients.value = clients.value.filter((x) => x.identity != index.identity);
+  if (clients.value.length <= 0) {
     showClients.value = false;
   }
 };
@@ -64,17 +64,17 @@ const onDelete = (index: client) => {
   <VRow>
     <VCol cols="12">
       <div class="tw-flex tw-gap-2">
-        <VBtn @click="onDownload" color="info" :disabled="mockData.length <= 0">
-          Download
+        <VBtn @click="onDownload" color="info" :disabled="clients.length <= 0">
+          Descargar
         </VBtn>
         <VBtn
           @click="showClients = true"
           color="info"
-          v-if="mockData.length > 0"
+          v-if="clients.length > 0"
         >
           <div class="tw-flex tw-gap-1">
             <p>Clientes</p>
-            <p>({{ mockData.length }})</p>
+            <p>({{ clients.length }})</p>
           </div>
         </VBtn>
       </div>
@@ -86,6 +86,7 @@ const onDelete = (index: client) => {
         :errorMessages="
           validator.identity.$errors.map((x) => x.$message.toString())
         "
+        type="number"
       />
     </VCol>
     <VCol cols="12" md="6" lg="4">
@@ -123,7 +124,7 @@ const onDelete = (index: client) => {
     </VCol>
     <VCol cols="12" md="6" lg="4">
       <VTextField
-        label="Ocupacion iess"
+        label="Ocupacion IESS"
         v-model="newRecord.iessCode"
         :errorMessages="
           validator.iessCode.$errors.map((x) => x.$message.toString())
@@ -132,7 +133,7 @@ const onDelete = (index: client) => {
     </VCol>
     <VCol cols="12" md="6" lg="4">
       <VTextField
-        label="Dias de trabajo"
+        label="Días de trabajo"
         v-model="newRecord.workedDays"
         type="number"
         :errorMessages="
@@ -142,7 +143,7 @@ const onDelete = (index: client) => {
     </VCol>
     <VCol cols="12" md="6" lg="4">
       <VSelect
-        label="Tipo de contrato"
+        label="Tipo de pago"
         :items="payTypeDropDown"
         item-title="label"
         item-value="key"
@@ -155,7 +156,7 @@ const onDelete = (index: client) => {
 
     <VCol cols="12" md="6" lg="4">
       <VTextField
-        label="Fecha de retiro"
+        label="Fecha de jubilacion"
         v-model="newRecord.retirementDate"
         type="date"
       />
@@ -199,7 +200,7 @@ const onDelete = (index: client) => {
 
     <VCol cols="12" md="6" lg="4">
       <VCheckbox
-        label="Mensualisa desimos?"
+        label="Mensualiza decimos?"
         v-model="newRecord.isMonthly"
         true-value="X"
         :false-value="null"
@@ -212,7 +213,7 @@ const onDelete = (index: client) => {
       </div>
     </VCol>
     <VDialog max-width="1000" v-model="showClients">
-      <ClientTable :clients="mockData" @delete="onDelete" />
+      <ClientTable :clients="clients" @delete="onDelete" />
     </VDialog>
     <VSnackbar v-model="snackbar" color="error">
       Ya hay un registro con el documento {{ newRecord.identity }}

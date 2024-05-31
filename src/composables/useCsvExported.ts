@@ -50,7 +50,10 @@ const columnHeaders: ColumnHeader[] = [
       "SOLO SI SU TRABAJADOR MENSUALIZA EL PAGO DE LA DECIMOCUARTA REMUNERACIÓN PONGA UNA X",
   },
 ];
-const csvConfig = mkConfig({ columnHeaders: columnHeaders });
+const csvConfig = mkConfig({
+  columnHeaders: columnHeaders,
+  fieldSeparator: ";",
+});
 
 const downloadCsv = (params: client[]) => {
   //@ts-ignore
