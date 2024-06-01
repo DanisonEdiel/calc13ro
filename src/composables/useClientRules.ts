@@ -31,7 +31,7 @@ const clientRules = {
   retentionValue: {
     //@ts-ignore
     requiredIf: requiredIf((_: any, sibling: any) => {
-      return sibling.retirementDate;
+      return sibling.totalEarned;
     }),
   },
 };

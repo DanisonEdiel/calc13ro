@@ -17,7 +17,7 @@ export interface client {
   hoursPartiaTime: number;
   hasDisability: null | "X";
   isMonthly: null | "X";
-  retirementDate: string;
+  totalEarned: number;
   retentionValue: string;
 }
 
@@ -133,6 +133,16 @@ const onDelete = (index: client) => {
     </VCol>
     <VCol cols="12" md="6" lg="4">
       <VTextField
+        label="Total ganado"
+        v-model="newRecord.totalEarned"
+        type="number"
+        :errorMessages="
+          validator.retentionValue.$errors.map((x) => x.$message.toString())
+        "
+      />
+    </VCol>
+    <VCol cols="12" md="6" lg="4">
+      <VTextField
         label="Días de trabajo"
         v-model="newRecord.workedDays"
         type="number"
@@ -156,16 +166,9 @@ const onDelete = (index: client) => {
 
     <VCol cols="12" md="6" lg="4">
       <VTextField
-        label="Fecha de jubilacion"
-        v-model="newRecord.retirementDate"
-        type="date"
-      />
-    </VCol>
-    <VCol cols="12" md="6" lg="4">
-      <VTextField
-        label="Valor de retiro"
+        label="Valor retenido"
         v-model="newRecord.retentionValue"
-        :disabled="!newRecord.retirementDate"
+        :disabled="!newRecord.totalEarned"
         :errorMessages="
           validator.retentionValue.$errors.map((x) => x.$message.toString())
         "

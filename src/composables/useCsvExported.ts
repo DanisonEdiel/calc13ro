@@ -11,7 +11,11 @@ const columnHeaders: ColumnHeader[] = [
   { key: "name", displayLabel: "Nombres" },
   { key: "lastname", displayLabel: "Apellidos" },
   { key: "gender", displayLabel: "Genero (Masculino=M ó Femenino=F)" },
-  { key: "iessCode", displayLabel: "Ocupación(codigo iess)" },
+  { key: "iessCode", displayLabel: "Ocupación" },
+  {
+    key: "totalEarned",
+    displayLabel: "Total_ganado",
+  },
   {
     key: "workedDays",
     displayLabel: "Días laborados (360 días equivalen a un ańo)",
@@ -37,17 +41,13 @@ const columnHeaders: ColumnHeader[] = [
       "Solo si su trabajador posee algun tipo de discapacidad ponga una X",
   },
   {
-    key: "retirementDate",
-    displayLabel: "Fecha de Jubilación",
-  },
-  {
     key: "retentionValue",
-    displayLabel: "valor Retencion",
+    displayLabel: "Ingrese el valor retenido",
   },
   {
     key: "isMonthly",
     displayLabel:
-      "SOLO SI SU TRABAJADOR MENSUALIZA EL PAGO DE LA DECIMOCUARTA REMUNERACIÓN PONGA UNA X",
+      "SOLO SI SU TRABAJADOR MENSUALIZA EL PAGO DE LA DECIMOTERCER REMUNERACIÓN PONGA UNA X",
   },
 ];
 const csvConfig = mkConfig({
