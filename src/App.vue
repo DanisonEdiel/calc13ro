@@ -26,19 +26,8 @@ const tab = ref("one");
         <v-tabs-window-item value="one">
           <VCol cols="12">
             <div
-              class="tw-flex tw-justify-between tw-items-center tw-flex-wrap tw-gap-2"
-            >
-              <h3 class="tw-text-xl">Seleccione la región</h3>
-              <v-btn-toggle
-                v-model="toggle"
-                rounded="xl"
-                color="info"
-                mandatory
-                density="compact"
-              >
-                <v-btn :value="true"> Sierra y Amazonía </v-btn>
-                <v-btn :value="false"> Costa y Galápagos </v-btn>
-              </v-btn-toggle>
+              class="tw-flex tw-justify-between tw-items-center tw-flex-wrap tw-gap-2">
+              <h3 class="tw-text-xl">Décimo tercero</h3>
             </div>
           </VCol>
           <VCol>
